@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.sonus21</groupId>
   <artifactId>jackson-datatype-jts</artifactId>
-  <version>3.0.0</version>
+  <version>3.0.1</version>
   <name>Jackson-datatype-jts</name>
   <description>Add-on module for Jackson 3 to support JTS geometry types using
     the GeoJSON standard.</description>
@@ -60,6 +60,10 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <!-- Defaults: stage only, do not auto-publish. Override on the command
+         line with -Dcentral.autoPublish=true to release. -->
+    <central.autoPublish>false</central.autoPublish>
+    <central.waitUntil>validated</central.waitUntil>
   </properties>
 
   <dependencies>
@@ -218,8 +222,8 @@
                       <extensions>true</extensions>
                       <configuration>
                         <publishingServerId>central</publishingServerId>
-                        <autoPublish>true</autoPublish>
-                        <waitUntil>published</waitUntil>
+                        <autoPublish>${central.autoPublish}</autoPublish>
+                        <waitUntil>${central.waitUntil}</waitUntil>
                       </configuration>
                     </plugin>
 

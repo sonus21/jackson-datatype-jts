@@ -12,14 +12,14 @@ Releases are available on Maven Central.
 <dependency>
   <groupId>com.github.sonus21</groupId>
   <artifactId>jackson-datatype-jts</artifactId>
-  <version>3.0.0</version>
+  <version>3.0.1</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'com.github.sonus21:jackson-datatype-jts:3.0.0'
+implementation 'com.github.sonus21:jackson-datatype-jts:3.0.1'
 ```
 
 ## Requirements
@@ -32,6 +32,7 @@ implementation 'com.github.sonus21:jackson-datatype-jts:3.0.0'
 
 | Version | Jackson    | JTS    | Java |
 |---------|------------|--------|------|
+| 3.0.1   | 3.0.0      | 1.20.0 | 17   |
 | 3.0.0   | 3.0.0      | 1.20.0 | 17   |
 | 2.21.0  | 2.21.0     | 1.20.0 | 8    |
 | 2.19.2  | 2.x        | 1.20.0 | 8    |
@@ -69,8 +70,18 @@ The module supports `Point`, `LineString`, `Polygon`, `MultiPoint`, `MultiLineSt
 
 To publish to Maven Central via the [Central Portal](https://central.sonatype.com/):
 
+By default the release profile *stages* the artifacts in the Central Portal but does not auto-publish — go to https://central.sonatype.com/publishing/deployments to review and click **Publish** manually:
+
 ```sh
-mvn deploy -P release -DskipTests=true -B
+mvn clean deploy -P release -DskipTests=true -B
+```
+
+To skip the manual step and publish automatically (waits for `PUBLISHED` before exiting):
+
+```sh
+mvn clean deploy -P release -DskipTests=true -B \
+    -Dcentral.autoPublish=true \
+    -Dcentral.waitUntil=published
 ```
 
 Requires a `central` server entry in `~/.m2/settings.xml` with a Central Portal user token, and a GPG signing key available to `maven-gpg-plugin`.
