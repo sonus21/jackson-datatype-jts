@@ -12,14 +12,14 @@ Releases are available on Maven Central.
 <dependency>
   <groupId>io.github.sonus21</groupId>
   <artifactId>jackson-datatype-jts</artifactId>
-  <version>3.0.1</version>
+  <version>3.0.0</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'io.github.sonus21:jackson-datatype-jts:3.0.1'
+implementation 'io.github.sonus21:jackson-datatype-jts:3.0.0'
 ```
 
 ## Requirements
@@ -32,7 +32,6 @@ implementation 'io.github.sonus21:jackson-datatype-jts:3.0.1'
 
 | Version | Jackson    | JTS    | Java |
 |---------|------------|--------|------|
-| 3.0.1   | 3.0.0      | 1.20.0 | 17   |
 | 3.0.0   | 3.0.0      | 1.20.0 | 17   |
 | 2.21.0  | 2.21.0     | 1.20.0 | 8    |
 | 2.19.2  | 2.x        | 1.20.0 | 8    |
