@@ -1,7 +1,7 @@
 package com.bedatadriven.jackson.datatype.jts.parsers;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.exc.MismatchedInputException;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
 
@@ -10,9 +10,6 @@ import java.util.Map;
 
 import static com.bedatadriven.jackson.datatype.jts.GeoJson.*;
 
-/**
- * Created by mihaildoronin on 11/11/15.
- */
 public class GenericGeometryParser extends BaseParser implements GeometryParser<Geometry> {
 
     private Map<String, GeometryParser> parsers;
@@ -30,14 +27,14 @@ public class GenericGeometryParser extends BaseParser implements GeometryParser<
     }
 
     @Override
-    public Geometry geometryFromJson(JsonNode node) throws JsonMappingException {
-        String typeName = node.get(TYPE).asText();
+    public Geometry geometryFromJson(JsonNode node) {
+        String typeName = node.get(TYPE).asString();
         GeometryParser parser = parsers.get(typeName);
         if (parser != null) {
             return parser.geometryFromJson(node);
-        }
-        else {
-            throw new JsonMappingException("Invalid geometry type: " + typeName);
+        } else {
+            throw MismatchedInputException.from((tools.jackson.core.JsonParser) null, Geometry.class,
+                    "Invalid geometry type: " + typeName);
         }
     }
 }

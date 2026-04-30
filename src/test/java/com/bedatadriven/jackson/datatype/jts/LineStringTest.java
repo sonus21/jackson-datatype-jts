@@ -1,6 +1,5 @@
 package com.bedatadriven.jackson.datatype.jts;
 
-import com.fasterxml.jackson.databind.deser.Deserializers;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.LineString;
