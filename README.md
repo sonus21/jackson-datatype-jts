@@ -1,73 +1,80 @@
-
 # Jackson-datatype-jts
 
-Jackson Module which provides custom serializers and deserializers for [JTS Geometry](https://projects.eclipse.org/projects/locationtech.jts) objects
-using the [GeoJSON format](http://www.geojson.org/geojson-spec.html)
+Jackson 3 module providing serializers and deserializers for [JTS Geometry](https://projects.eclipse.org/projects/locationtech.jts) objects using the [GeoJSON format](http://www.geojson.org/geojson-spec.html).
 
-## Installation 
+## Installation
 
-Releases of jackson-datatype-jts are available on Maven Central.
+Releases are available on Maven Central.
 
 ### Maven
 
-To use the module in Maven-based projects, use following dependency:
-
 ```xml
 <dependency>
-  <groupId>com.graphhopper.external</groupId>
+  <groupId>com.github.sonus21</groupId>
   <artifactId>jackson-datatype-jts</artifactId>
-  <version>[latest]</version>
-</dependency>    
+  <version>3.0.0</version>
+</dependency>
 ```
 
-GraphHopper updates compared to [upstream](https://github.com/bedatadriven/jackson-datatype-jts):
+### Gradle
 
- * 2.21.0     uses JTS 1.20.0
- * 2.19.2     uses JTS 1.20.0
- * 2.14       uses JTS 1.19.0, requires Java 8
- * 0.12-2.5-1 uses JTS 1.15.1
- * 0.10-2.5-2 new groupId `com.graphhopper.external` and introduced JTS 1.15.0
- * 0.12-2.5-0 with the original jackson-databind dependency 2.4.2 and JTS 1.15.1
- * 0.12-2.5-1 with jackson-databind 2.9.6
- * 1.0-2.7    with jackson-databind 2.9.9 and JTS 1.16.0
+```groovy
+implementation 'com.github.sonus21:jackson-datatype-jts:3.0.0'
+```
 
+## Requirements
+
+- Java 17+
+- Jackson 3.x (`tools.jackson.core:jackson-databind:3.0.0`)
+- JTS 1.20.0
+
+## Version history
+
+| Version | Jackson    | JTS    | Java |
+|---------|------------|--------|------|
+| 3.0.0   | 3.0.0      | 1.20.0 | 17   |
+| 2.21.0  | 2.21.0     | 1.20.0 | 8    |
+| 2.19.2  | 2.x        | 1.20.0 | 8    |
+| 2.14    | 2.x        | 1.19.0 | 8    |
+
+For Jackson 2.x users, stay on the `2.x` line of releases.
 
 ## Usage
 
-### Registering module
+### Registering the module
 
-To use JTS geometry datatypes with Jackson, you will first need to register the module first (same as
-with all Jackson datatype modules):
+Jackson 3 mappers are immutable; register the module via the builder:
 
 ```java
-ObjectMapper mapper = new ObjectMapper();
-mapper.registerModule(new JtsModule());
+ObjectMapper mapper = JsonMapper.builder()
+    .addModule(new JtsModule())
+    .build();
 ```
 
-### Reading and Writing Geometry types
-
-After registering JTS module, [Jackson Databind](https://github.com/FasterXML/jackson-databind)
-will be able to write Geometry instances as GeoJSON and
-and read GeoJSON geometries as JTS Geometry objects.
-
-To write a Point object as GeoJSON:
+### Reading and writing geometry types
 
 ```java
 GeometryFactory gf = new GeometryFactory();
 Point point = gf.createPoint(new Coordinate(1.2345678, 2.3456789));
-String geojson = objectMapper.writeValueAsString(point);
+String geojson = mapper.writeValueAsString(point);
 ```
-
-You can also read GeoJSON in as JTS geometry objects:
 
 ```java
-InputStream in;
-Point point = mapper.readValue(in, Point.class);
+Point point = mapper.readValue(geojson, Point.class);
 ```
 
-# Release
+The module supports `Point`, `LineString`, `Polygon`, `MultiPoint`, `MultiLineString`, `MultiPolygon`, `GeometryCollection`, and the `Geometry` interface itself.
 
-For now do it manually and see [the maven command here](https://github.com/graphhopper/graphhopper/blob/master/.github/workflows/publish-maven-central.yml):
+## Release
+
+To publish to Maven Central via the [Central Portal](https://central.sonatype.com/):
+
+```sh
+mvn deploy -P release -DskipTests=true -B
 ```
-mvn deploy -P release -DskipTests=true -Dpgp.secretkey=keyring:id=0E2FBADB -B
-```
+
+Requires a `central` server entry in `~/.m2/settings.xml` with a Central Portal user token, and a GPG signing key available to `maven-gpg-plugin`.
+
+## License
+
+Apache License 2.0

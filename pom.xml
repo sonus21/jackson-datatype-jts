@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.graphhopper.external</groupId>
+  <groupId>com.github.sonus21</groupId>
   <artifactId>jackson-datatype-jts</artifactId>
   <version>3.0.0</version>
   <name>Jackson-datatype-jts</name>
-  <description>Add-on module for Jackson (http://jackson.codehaus.org) to support JTS geometry types using
+  <description>Add-on module for Jackson 3 to support JTS geometry types using
     the GeoJSON standard.</description>
-  <url>https://github.com/bedatadriven/jackson-datatype-jts/</url>
+  <url>https://github.com/sonus21/jackson-datatype-jts/</url>
 
   <licenses>
     <license>
@@ -24,24 +24,36 @@
       <organizationUrl>https://bedatadriven.com</organizationUrl>
       <timezone>Europe/Amsterdam</timezone>
       <roles>
+        <role>Original author</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Sonu Kumar</name>
+      <url>https://github.com/sonus21</url>
+      <roles>
         <role>Maintainer</role>
       </roles>
     </developer>
   </developers>
-  
+
   <scm>
-    <connection>scm:git:git@github.com:bedatadriven/jackson-datatype-jts.git</connection>
-    <url>scm:git:git@github.com:bedatadriven/jackson-datatype-jts.git</url>
-    <developerConnection>scm:git:git@github.com:bedatadriven/jackson-datatype-jts.git</developerConnection>
-    <tag>jackson-datatype-jts-2.0</tag>
+    <connection>scm:git:git@github.com:sonus21/jackson-datatype-jts.git</connection>
+    <url>https://github.com/sonus21/jackson-datatype-jts</url>
+    <developerConnection>scm:git:git@github.com:sonus21/jackson-datatype-jts.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
     <snapshotRepository>
-      <id>ossrh</id>
-      <name>Sonatype OSSRH snapshots</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <id>central</id>
+      <name>Sonatype Central Snapshots</name>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
     </snapshotRepository>
+    <repository>
+      <id>central</id>
+      <name>Sonatype Central</name>
+      <url>https://central.sonatype.com</url>
+    </repository>
   </distributionManagement>
 
   <properties>
@@ -206,6 +218,8 @@
                       <extensions>true</extensions>
                       <configuration>
                         <publishingServerId>central</publishingServerId>
+                        <autoPublish>true</autoPublish>
+                        <waitUntil>published</waitUntil>
                       </configuration>
                     </plugin>
 
