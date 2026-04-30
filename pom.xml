@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.github.sonus21</groupId>
+  <groupId>io.github.sonus21</groupId>
   <artifactId>jackson-datatype-jts</artifactId>
   <version>3.0.1</version>
   <name>Jackson-datatype-jts</name>
@@ -60,10 +60,13 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <!-- Defaults: stage only, do not auto-publish. Override on the command
-         line with -Dcentral.autoPublish=true to release. -->
+    <!-- Defaults: upload-only and exit. The deployment sits on the
+         Central Portal awaiting your manual Publish/Drop click — Maven
+         does not wait for validation to finish or auto-publish.
+         Override on the command line if you want a fully automated
+         release: -Dcentral.autoPublish=true -Dcentral.waitUntil=published -->
     <central.autoPublish>false</central.autoPublish>
-    <central.waitUntil>validated</central.waitUntil>
+    <central.waitUntil>uploaded</central.waitUntil>
   </properties>
 
   <dependencies>

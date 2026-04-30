@@ -10,7 +10,7 @@ Releases are available on Maven Central.
 
 ```xml
 <dependency>
-  <groupId>com.github.sonus21</groupId>
+  <groupId>io.github.sonus21</groupId>
   <artifactId>jackson-datatype-jts</artifactId>
   <version>3.0.1</version>
 </dependency>
@@ -19,7 +19,7 @@ Releases are available on Maven Central.
 ### Gradle
 
 ```groovy
-implementation 'com.github.sonus21:jackson-datatype-jts:3.0.1'
+implementation 'io.github.sonus21:jackson-datatype-jts:3.0.1'
 ```
 
 ## Requirements
@@ -70,7 +70,7 @@ The module supports `Point`, `LineString`, `Polygon`, `MultiPoint`, `MultiLineSt
 
 To publish to Maven Central via the [Central Portal](https://central.sonatype.com/):
 
-By default the release profile *stages* the artifacts in the Central Portal but does not auto-publish — go to https://central.sonatype.com/publishing/deployments to review and click **Publish** manually:
+By default the release profile *uploads* the bundle to the Central Portal and exits immediately — Maven does not wait for validation, and nothing is auto-published. The deployment sits on https://central.sonatype.com/publishing/deployments awaiting your **Publish** or **Drop** click:
 
 ```sh
 mvn clean deploy -P release -DskipTests=true -B
